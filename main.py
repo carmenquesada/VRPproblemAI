@@ -4,6 +4,8 @@ from clustering import assign_packages
 from ga import Problem_Genetic, genetic_algorithm
 import matplotlib.pyplot as plt
 
+# Data reading
+
 packages = pd.read_csv('data/packages.csv', header = 0,
                         names =  ['id', 'init_city', 'dest_city', 'size'])
 
@@ -33,10 +35,13 @@ city_coords = {
     'Valencia': [-0.38, 39.47]    
 }
 
+
+# Package per vehicle and total load
+
 packages, vehicles = assign_packages(packages, vehicles, city_coords)
 
 
-print("Package assigment between vehicles considering origin city, package size and vehicle capacity:")
+print("Package assigment between vehicles:")
 
 for i in range(len(vehicles)):
     v_id = vehicles.at[i, 'id']
@@ -51,6 +56,9 @@ for i in range(len(vehicles)):
             load += p['size']
 
     print(" Total load:", load, "/", vehicles.at[i, 'capacity'])
+
+
+# GA algorithm: best route per vehicle and total distance
 
 def find_distance(origin, destination):
     for i in range(len(distances)):
@@ -105,6 +113,29 @@ for i in range(len(vehicles)):
         print(" Distance:", cost, "km")
 
 
+# Bar graph for each vehicle best route: Figure_1.png in /graphs folder
+
+routes = [
+    "Route 1",
+    "Route 2",
+    "Route 3",
+    "Route 4",
+    "Route 5"
+]
+
+distances = [1250, 1010, 760, 1020, 350]
+
+plt.barh(routes, distances, color='blue')  
+
+plt.xlabel("Distance (km)")
+plt.title("Routes")
+
+plt.show()
+
+# 4 experiments simulation
+print()
+print("The following experiments have been executed:")
+
 experiments = [
     {'population': 20, 'mutation': 0.1, '1': 123.4, '2': 125.6, '3': 124.1},
     {'population': 30, 'mutation': 0.1, '1': 120.0, '2': 118.5, '3': 119.2},
@@ -119,6 +150,7 @@ for e in experiments:
     avg = (e['1'] + e['2'] + e['3']) / 3
     print(str(e['population']) + "," + str(e['mutation']) + "," + str(e['1']) + "," + str(e['2']) + "," + str(e['3']) + "," + str(avg))
 
+# Bar graph for experiments comparison: Figure_2.png in /graphs folder
 
 x_labels = []
 y_values = []
@@ -152,21 +184,4 @@ plt.tight_layout()
 plt.show()
 
 
-import matplotlib.pyplot as plt
 
-
-routes = [
-    "Route 1",
-    "Route 2",
-    "Route 3",
-    "Route 4",
-    "Route 5"
-]
-distances = [1250, 1010, 760, 1020, 350]
-
-plt.barh(routes, distances, color='blue')  
-
-plt.xlabel("Distance (km)")
-plt.title("Routes")
-
-plt.show()
