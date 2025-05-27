@@ -1,0 +1,11 @@
+id,origen,destino,size
+1,Madrid,Sevilla,5 
+2,Valencia,Bilbao,7
+3,Bilbao,Madrid,3
+4,Sevilla,Barcelona,4
+5,Barcelona,Valencia,6
+6,Madrid,Bilbao,2
+7,Valencia,Madrid,8
+8,Bilbao,Barcelona,1
+9,Barcelona,Sevilla,9
+10,Sevilla,Valencia,5
