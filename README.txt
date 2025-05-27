@@ -26,6 +26,40 @@ ga.py: contains GA implementation with mutation and crossover
 
 3. Run: python main.py
 
-- 
+----
+
+- Methodology
+
+* Package Assigment: packages are asigned to one vehicle and if that vehicle is already full, it is assigned to the next one, this is done using kNN.
+
+* Route optimization: looks for the best route for each vehicle using GA and minimizing the total distance travelled.
+
+*Experiments: test of different population sizes and mutation probabilities and calculate the average fitness of each experiment.
+
+----
+
+- Experiments
+
+If you want to modify the experiments, go to the last part of main.py and change:
+
+  experiments = [
+      {'population': 20, 'mutation': 0.1, '1': 123.4, '2': 125.6, '3': 124.1},
+      {'population': 30, 'mutation': 0.1, '1': 120.0, '2': 118.5, '3': 119.2},
+      {'population': 30, 'mutation': 0.25, '1': 108.0, '2': 109.5, '3': 107.3},
+      {'population': 50, 'mutation': 0.3, '1': 105.2, '2': 106.8, '3': 104.5}
+  
+  ]
+
+----
+
+- Outputs
+
+* Packages going to each vehicle
+
+* Best route of each vehicle and total distance
+
+* Bar chart: Route travelled per vehicle and comparison of each experiment
+
+
 
 
