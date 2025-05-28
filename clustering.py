@@ -6,8 +6,8 @@ def assign_packages(packages, vehicles, city_coords):
     vehicles['x'] = vehicles['origin_city'].map(lambda c: city_coords[c][0])
     vehicles['y'] = vehicles['origin_city'].map(lambda c: city_coords[c][1])
 
-    attr_train = vehicles[['x', 'y']].values
-    objective_train = vehicles['id'].values
+    attr_train = np.array(vehicles[['x', 'y']])
+    objective_train = np.array(vehicles['id'])
 
     clasif_knn = neighbors.KNeighborsClassifier(n_neighbors=2, metric='euclidean')
     clasif_knn.fit(attr_train, objective_train)
@@ -23,7 +23,7 @@ def assign_packages(packages, vehicles, city_coords):
 
     for i in range(len(packages)):
         p_size = packages.at[i, 'size']
-        vecinos = neighbors_ids[i]  # índices en el array de vehículos
+        vecinos = neighbors_ids[i]  
 
         for v in vecinos:
             v_id = vehicles.at[v, 'id']
@@ -33,7 +33,7 @@ def assign_packages(packages, vehicles, city_coords):
             if carga + p_size <= cap:
                 packages.at[i, 'vehicle_id'] = v_id
                 vehicles.at[v, 'actual_load'] = carga + p_size
-                break  # asignado, no hace falta probar el otro
+                break  
 
     return packages, vehicles
 
